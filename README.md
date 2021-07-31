@@ -1,12 +1,24 @@
-# Getting Started with Create React App
+# Udacity, Would You Rather...? 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Would you rather, is a game build using React, Redux, and a fake database API.
+
+This app is build using create-react-app
+
+# Installation 
+
+To install the application, clone this repo to your local machine using 
+
+`git clone https://github.com/MohamedAlaa001/Udacity-Would-You-Rather`
+
+Once done open your preferred terminal and run the following command
+
+### `npm install`
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `yarn start`
+### `yarn start` or `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -14,12 +26,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
+### `yarn build` or `npm build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -29,42 +36,26 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+# Description
+The application provides you a dashboard to use once logged in and authenticated, through this dashboard we can access multiple views/pages
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1) Homepage.
+2) Leaderboard.
+3) Create Question.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Homepage
+Main dashboard page, consist of two questions categories (Answered, Unanswered) and a filter to either toggle a single category or show both of them.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Question View
+Each question navigates to another view that shows the question details either answered or unanswered with the appropriate controls.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+If the question is not answered you will be able to choose one answer from the two given.
 
-## Learn More
+else you will see your voted answer and statistics for votes made by other users.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Leaderboard
+A leaderboard provides ranking for all users on the website, the ranking criteria works on the total number of questions and answers a user make.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Create Question
+A view that provides a form to enter the two options for `Would you rather`.
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
