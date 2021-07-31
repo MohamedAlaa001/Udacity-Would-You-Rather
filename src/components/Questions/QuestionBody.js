@@ -1,5 +1,6 @@
 import { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router';
 
 import { getQuestion, solveQuestion } from '../../actions/questions';
 import Spinner from '../layout/Spinner';
@@ -14,8 +15,9 @@ const QuestionBody = ({
   solveQuestion,
   question,
 }) => {
+  const history = useHistory();
   useEffect(() => {
-    getQuestion(match.params.question_id);
+    getQuestion(match.params.question_id, history);
     // eslint-disable-next-line
   }, []);
 

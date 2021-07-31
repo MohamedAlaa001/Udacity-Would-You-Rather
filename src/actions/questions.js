@@ -34,46 +34,51 @@ export const getQuestions = () => async (dispatch) => {
   }
 };
 
-export const getQuestion = (question_id) => async (dispatch, getState) => {
-  let state = getState();
+export const getQuestion =
+  (question_id, history) => async (dispatch, getState) => {
+    let state = getState();
 
-  if (!state.questions.questions) {
-    await dispatch(getQuestions());
-    state = getState();
-  }
-  const { auth, questions } = state;
+    if (!state.questions.questions) {
+      await dispatch(getQuestions());
+      state = getState();
+    }
+    const { auth, questions } = state;
 
-  const question = questions.questions.find((el) => el.id === question_id);
+    const question = questions.questions.find((el) => el.id === question_id);
 
-  const user = auth.users.find((user) => user && user.id === question.author);
+    if (!question) {
+      return history.replace('/404');
+    }
 
-  let votes = null;
+    const user = auth.users.find((user) => user && user.id === question.author);
 
-  if (auth.user.answers[question_id]) {
-    const countOne = question.optionOne.votes.length;
-    const countTwo = question.optionTwo.votes.length;
-    votes = {
-      choice: auth.user.answers[question_id],
-      optionOne: {
-        count: countOne,
-        percentage: Math.ceil((countOne / (countOne + countTwo)) * 1000) / 10,
+    let votes = null;
+
+    if (auth.user.answers[question_id]) {
+      const countOne = question.optionOne.votes.length;
+      const countTwo = question.optionTwo.votes.length;
+      votes = {
+        choice: auth.user.answers[question_id],
+        optionOne: {
+          count: countOne,
+          percentage: Math.ceil((countOne / (countOne + countTwo)) * 1000) / 10,
+        },
+        optionTwo: {
+          count: countTwo,
+          percentage: Math.ceil((countTwo / (countOne + countTwo)) * 1000) / 10,
+        },
+      };
+    }
+
+    dispatch({
+      type: GET_QUESTION,
+      payload: {
+        ...question,
+        user,
+        votes,
       },
-      optionTwo: {
-        count: countTwo,
-        percentage: Math.ceil((countTwo / (countOne + countTwo)) * 1000) / 10,
-      },
-    };
-  }
-
-  dispatch({
-    type: GET_QUESTION,
-    payload: {
-      ...question,
-      user,
-      votes,
-    },
-  });
-};
+    });
+  };
 
 export const addQuestion = (question) => async (dispatch) => {
   try {
