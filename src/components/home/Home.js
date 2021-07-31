@@ -42,13 +42,12 @@ const Home = ({ getQuestions, questions, loading, user }) => {
                 <div className='title'>
                   <strong>Unanswered Questions</strong>
                 </div>
-                {questions.map((question) => {
-                  if (!user.answers[question.id]) {
-                    return (
+                {questions.map(
+                  (question) =>
+                    !user.answers[question.id] && (
                       <QuestionItem key={question.id} question={question} />
-                    );
-                  }
-                })}
+                    )
+                )}
               </Fragment>
             )}
             {answered && (
@@ -56,13 +55,12 @@ const Home = ({ getQuestions, questions, loading, user }) => {
                 <div className='title'>
                   <strong>Answered Questions</strong>
                 </div>
-                {questions.map((question) => {
-                  if (user.answers[question.id]) {
-                    return (
+                {questions.map(
+                  (question) =>
+                    user.answers[question.id] && (
                       <QuestionItem key={question.id} question={question} />
-                    );
-                  }
-                })}
+                    )
+                )}
               </Fragment>
             )}
           </div>

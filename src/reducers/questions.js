@@ -1,4 +1,9 @@
-import { GET_QUESTIONS, GET_QUESTION, ADD_QUESTION } from '../actions/types';
+import {
+  GET_QUESTIONS,
+  GET_QUESTION,
+  ADD_QUESTION,
+  SOLVE_QUESTION,
+} from '../actions/types';
 
 const initialState = {
   questions: null,
@@ -27,6 +32,32 @@ function questionsReducer(state = initialState, action) {
         ...state,
         questions: [payload, ...state.questions],
         loading: false,
+      };
+    case SOLVE_QUESTION:
+      return {
+        ...state,
+        questions: state.questions.map((el) => {
+          if (payload.qid === el.id) {
+            el = {
+              ...el,
+              [payload.answer]: {
+                ...el[payload.answer],
+                votes: [payload.authedUser, ...el[payload.answer].votes],
+              },
+            };
+          }
+          return el;
+        }),
+        // question: {
+        //   ...state.question,
+        //   [payload.answer]: {
+        //     ...state.question[payload.answer],
+        //     votes: [
+        //       payload.authedUser,
+        //       ...state.question[payload.answer].votes,
+        //     ],
+        //   },
+        // },
       };
     default:
       return state;

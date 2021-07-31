@@ -11,15 +11,10 @@ const LeaderboardUser = ({ user }) => {
           </div>
           <div>Number of questions: {numberOfQuestions}</div>
           <div>Number of answers: {numberOfAnswers}</div>
+          <div>Total Score: {numberOfQuestions + numberOfAnswers}</div>
         </div>
         <div className='col-md-4 img'>
           <img src={user.avatarURL} style={{ borderRadius: '50%' }} alt='' />
-          <div className='card ms-5'>
-            <div className='card-title'>Score</div>
-            <div className='card-body'>
-              {numberOfAnswers + numberOfQuestions}
-            </div>
-          </div>
         </div>
       </div>
     </div>

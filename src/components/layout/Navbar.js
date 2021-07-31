@@ -14,11 +14,7 @@ const Navbar = ({ logout }) => {
         </div>
         <div className='navbar-right-menu list-inline'>
           <div className='list-inline-item'>
-            <Link
-              to='/dashboard/add'
-              className='nav-link'
-              activeClassName='active'
-            >
+            <Link to='/dashboard/add' className='nav-link'>
               Create Question
             </Link>
           </div>

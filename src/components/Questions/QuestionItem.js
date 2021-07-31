@@ -1,31 +1,26 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import QuestionUser from './QuestionUser';
 
 const QuestionItem = ({ question, users }) => {
   const { id, author, timestamp, optionOne, optionTwo } = question;
 
-  const { name } = users.find((user) => user && user.id === author);
-
-  const date = new Date(timestamp);
-
-  const formatedDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
-
+  const user = users.find((user) => user && user.id === author);
   return (
     <div className='question-body'>
       <Link to={`/dashboard/questions/${id}`}>
-        <div className='title'>
-          <strong>By {name}</strong>
-          <span className='d-block'>Created on {formatedDate}</span>
-        </div>
-        <div className='question-body-votes'>
-          <div>Would You Rather...?</div>
-          <div>
-            Option One:
-            <strong className='d-block'>{optionOne.text}</strong>
+        <div className='row g-0 align-items-center'>
+          <div className='col-md-8'>
+            <div className='title'>
+              <strong>Would You Rather...</strong>
+            </div>
+            <ul className='question-body-votes lead'>
+              <li>{optionOne.text}</li>
+              <li>{optionTwo.text}</li>
+            </ul>
           </div>
-          <div className='mt-2'>
-            Option Two:
-            <strong className='d-block'>{optionTwo.text}</strong>
+          <div className='col-md-4'>
+            <QuestionUser user={user} timestamp={timestamp} />
           </div>
         </div>
       </Link>

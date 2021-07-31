@@ -1,4 +1,11 @@
-import { GET_QUESTIONS, GET_QUESTION, ADD_QUESTION } from './types';
+import {
+  GET_QUESTIONS,
+  GET_QUESTION,
+  ADD_QUESTION,
+  SOLVE_QUESTION,
+  ADD_USER_QUESTION_ANSWER,
+  ADD_USER_QUESTION,
+} from './types';
 import * as API from '../_DATA';
 
 export const getQuestions = () => async (dispatch) => {
@@ -73,10 +80,40 @@ export const addQuestion = (question) => async (dispatch) => {
     const res = await API._saveQuestion(question);
 
     dispatch({
+      type: ADD_USER_QUESTION,
+      payload: { id: res.id, authedUser: question.author },
+    });
+
+    dispatch({
       type: ADD_QUESTION,
       payload: res,
     });
+
     alert('Question Created');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const solveQuestion = (answer) => async (dispatch) => {
+  try {
+    await API._saveQuestionAnswer(answer);
+
+    dispatch({
+      type: ADD_USER_QUESTION_ANSWER,
+      payload: {
+        authedUser: answer.authedUser,
+        qid: answer.qid,
+        answer: answer.answer,
+      },
+    });
+
+    dispatch({
+      type: SOLVE_QUESTION,
+      payload: answer,
+    });
+
+    dispatch(getQuestion(answer.qid));
   } catch (err) {
     console.log(err);
   }

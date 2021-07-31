@@ -1,4 +1,10 @@
-import { LOGIN, LOGOUT, GET_USERS } from '../actions/types';
+import {
+  LOGIN,
+  LOGOUT,
+  GET_USERS,
+  ADD_USER_QUESTION,
+  ADD_USER_QUESTION_ANSWER,
+} from '../actions/types';
 
 const initialState = {
   isAuthenticated: null,
@@ -30,6 +36,47 @@ function authReducer(state = initialState, action) {
         loading: true,
         user: null,
         users: null,
+      };
+    case ADD_USER_QUESTION:
+      return {
+        ...state,
+        users: state.users.map((el) => {
+          if (el.id === payload.authedUser) {
+            el = {
+              ...el,
+              questions: [...el.questions, payload.id],
+            };
+          }
+          return el;
+        }),
+        user: {
+          ...state.user,
+          questions: [...state.user.questions, payload.id],
+        },
+      };
+    case ADD_USER_QUESTION_ANSWER:
+      return {
+        ...state,
+        users: state.users.map((el) => {
+          if (el.id === payload.authedUser) {
+            el = {
+              ...el,
+              answers: {
+                ...el.answers,
+                [payload.qid]: payload.answer,
+              },
+            };
+          }
+          return el;
+        }),
+        user: {
+          ...state.user,
+          answers: {
+            ...state.user.answers,
+            [payload.qid]: payload.answer,
+          },
+        },
+        loading: false,
       };
     default:
       return state;
